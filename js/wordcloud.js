@@ -162,7 +162,42 @@ $.getJSON("data/vonnegut-0.json", function(data){
     $("#"+slug).append(
       '<div class=\"scrubber\"><input id=\"'+slug+'-scrub\" type=\"range\" min=\"0\" max=\"'+data[slug]['length']+'\" value=\"0\" step=\"1\"></div>'
     );
+
+    // Play Button
+    $('#'+slug).append(
+      '<button type=\"button\" id=\"'+slug+'-btn\" class=\"btn btn-default btn-xs play-btn\" aria-label=\"Play\"><span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span></button>'
+    );
+
+    $('#'+slug).append(
+      '<button type=\"button\" id=\"'+slug+'-btn-pause\" class=\"btn btn-default btn-xs play-btn\" aria-label=\"Pause\"><span class=\"glyphicon glyphicon-pause\" aria-hidden=\"true\"></span></button>'
+    );
+
+    // Load First Clouds
     updateCloud(slug, 0);
+
+    var play;
+
+    function autoAdvance(){
+        var scrubVal = $('#'+slug+'-scrub').val();
+        console.log(scrubVal);
+        var newVal = parseInt(scrubVal, 10) + 1;
+        $('#'+slug+'-scrub').val(newVal);
+        updateCloud(slug, newVal);
+    }
+
+    $('#'+slug+'-btn').click(function(){
+      console.log('clicked ' + slug);
+      autoAdvance();
+      play = setInterval(function(){
+        autoAdvance();
+      }, 2500);
+    });
+
+    $('#'+slug+'-btn-pause').click(function(){
+      clearInterval(play);
+    });
+
+
     $("#"+slug+"-scrub").on("input", function(){
       var sectNo = $(this).val();
       console.log(sectNo);
@@ -171,5 +206,7 @@ $.getJSON("data/vonnegut-0.json", function(data){
   });
 });
 });
+
+
 
 })();
