@@ -152,6 +152,8 @@ $.getJSON("data/vonnegut-0.json", function(data){
       '<canvas class="chart-canvas" id=\"'+slug+'-chart\" width=\"800\" height=\"150\"></canvas>'
     );
 
+
+
     var ctx = document.getElementById(slug+"-chart").getContext("2d");
 
     var xLabels = [];
@@ -178,13 +180,12 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     var chartOptions = {
       pointDot : false,
-      pointHitDetectionRadius : 1,
+      pointHitDetectionRadius : 25,
       scaleShowVerticalLines: false,
       bezierCurve: false
     };
 
     var myNewChart = new Chart(ctx).Line(chartData, chartOptions);
-
 
     var stepCount = data[slug]['length'] - 1;
 
@@ -192,6 +193,16 @@ $.getJSON("data/vonnegut-0.json", function(data){
     $("#"+slug).append(
       '<div class=\"scrubber\"><input id=\"'+slug+'-scrub\" type=\"range\" min=\"0\" max=\"'+stepCount+'\" value=\"0\" step=\"1\"></div>'
     );
+
+
+    $("#"+slug+"-chart").on("click", function(evt){
+      var activePoints = myNewChart.getPointsAtEvent(evt);
+      console.log(activePoints[0].x);
+      var ratio = activePoints[0].x / 800.0;
+      var ix = Math.round(ratio * data[slug]['length']);
+      $('#'+slug+'-scrub').val(ix);
+      updateCloud(slug, ix);
+    });
 
     // Play Button
     $('#'+slug).append(
