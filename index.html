@@ -180,8 +180,12 @@ a:hover {
 }
 
 .chart-canvas {
+	z-index: -1;
 	display: inline;
 	margin-top: 150px;
+	position: relative;
+	top: 0;
+	left: auto;
 	/*margin-left: -15px;*/
 }
 
@@ -197,6 +201,110 @@ button.play-btn {
 	padding-left: 7px;
 	padding-right: 6px;
 }
+
+body {
+    padding: 30px;
+}
+
+/*RANGE INPUT STUFF*/
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    
+    /*required for proper track sizing in FF*/
+    width: 800px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    z-index: 99;
+    width: 800px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    z-index: 99;
+    border: none;
+    height: 125px;
+    width: 10px;
+    border-radius: 3px;
+    background: #E74C3C;
+    margin-top: -105px;
+    /*opacity: 0.8;*/
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    z-index: 99;
+    width: 800px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    z-index: 99;
+    border: none;
+    height: 125px;
+    width: 10px;
+    border-radius: 3px;
+    background: #E74C3C;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    z-index: 99;
+    width: 800px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    z-index: 99;
+    border: none;
+    height: 125px;
+    width: 10px;
+    border-radius: 3px;
+    background: #E74C3C;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
 
 </style>
 
