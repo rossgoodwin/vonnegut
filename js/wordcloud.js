@@ -184,7 +184,7 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     var chartOptions = {
       pointDot : false,
-      pointHitDetectionRadius : 25,
+      pointHitDetectionRadius : 5,
       scaleShowVerticalLines: false,
       bezierCurve: false
     };
@@ -201,8 +201,8 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     $("#"+slug+"-chart").on("click", function(evt){
       var activePoints = myNewChart.getPointsAtEvent(evt);
-      var xPos = activePoints[0].x;
-      var ix = Math.round(xPos.map(5, 780, 0, data[slug]['length']));
+      var xPos = activePoints[Math.floor(activePoints.length/2)].x;
+      var ix = Math.floor(xPos.map(0, 800, 0, data[slug]['length']));
       console.log(xPos);
       console.log(ix);
       $('#'+slug+'-scrub').val(ix);
