@@ -152,7 +152,8 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     var chartOptions = {
       pointDot : false,
-      pointHitDetectionRadius : 1
+      pointHitDetectionRadius : 1,
+      scaleShowVerticalLines: false
     };
 
     var myNewChart = new Chart(ctx).Line(chartData, chartOptions);
