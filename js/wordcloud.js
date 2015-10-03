@@ -121,6 +121,7 @@ function updateCloud(bookslug, section) {
                       .append("a")
                       .attr("href", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s"+data[bookslug]['title']+"&mode=blended")
                       .attr("class", "twitter-link")
+                      .attr("target", "_blank")
                       .text(data[bookslug]['title']);
 
       overallContainer.transition()
