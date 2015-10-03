@@ -123,7 +123,7 @@ $.getJSON("data/vonnegut-0.json", function(data){
     Chart.defaults.global.scaleFontFamily = "'Cousine', monospace"
 
     $("#"+slug).append(
-      '<canvas class="chart-canvas" id=\"'+slug+'-chart\" width=\"840\" height=\"150\" style=\"width: 840px; height: 150px;margin-left: -36px;\"></canvas>'
+      '<canvas class="chart-canvas" id=\"'+slug+'-chart\" width=\"800\" height=\"150\"></canvas>'
     );
 
     var ctx = document.getElementById(slug+"-chart").getContext("2d");
