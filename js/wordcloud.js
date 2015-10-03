@@ -8,6 +8,29 @@
 
 (function() {
 
+// function range(start, stop, step) {
+//     if (typeof stop == 'undefined') {
+//         // one param defined
+//         stop = start;
+//         start = 0;
+//     }
+
+//     if (typeof step == 'undefined') {
+//         step = 1;
+//     }
+
+//     if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+//         return [];
+//     }
+
+//     var result = [];
+//     for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+//         result.push(i);
+//     }
+
+//     return result;
+// };
+
 var spectrum = ['#F22613', '#E74C3C', '#D35400', '#F2784B', '#95A5A6', '#68C3A3', '#4DAF7C', '#3FC380', '#2ECC71'];
 
 spectrum.map(function(hex){
@@ -87,6 +110,33 @@ $.getJSON("data/vonnegut-0.json", function(data){
     $("#vis").append(
       '<div id=\"'+slug+'\" class=\"col-md-12 transparent\"></div>'
     );
+
+    // Charts.js stuff goes here
+    // $("#"+slug).append(
+    //   '<canvas id=\"'+slug+'-chart\" width=\"400\" height=\"400\"></canvas>'
+    // );
+
+    // var ctx = document.getElementById(slug+"-chart").getContext("2d");
+
+    // var data = {
+    //     labels: range(data[slug]['length']),
+    //     datasets: [
+    //         {
+    //             label: data[slug]['title'],
+    //             fillColor: "rgba(220,220,220,0.2)",
+    //             strokeColor: "rgba(220,220,220,1)",
+    //             pointColor: "rgba(220,220,220,1)",
+    //             pointStrokeColor: "#fff",
+    //             pointHighlightFill: "#fff",
+    //             pointHighlightStroke: "rgba(220,220,220,1)",
+    //             data: data
+    //         }
+    //     ]
+    // };
+
+    // var myNewChart = new Chart(ctx).PolarArea(data);
+
+
     $("#"+slug).append(
       '<div class=\"scrubber\"><input id=\"'+slug+'-scrub\" type=\"range\" min=\"0\" max=\"'+data[slug]['length']+'\" value=\"0\" step=\"1\"></div>'
     );
