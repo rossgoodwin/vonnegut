@@ -59,14 +59,14 @@ function updateCloud(bookslug, section) {
 
       var labelText = overallContainer
                       .append("a")
-                      .attr("href", "https://en.wikipedia.org/wiki/"+data[bookslug]['title'])
+                      .attr("href", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s"+data[bookslug]['title']+"&mode=blended")
                       .attr("class", "twitter-link")
                       .text(data[bookslug]['title']);
 
       overallContainer.transition()
           .style("opacity", 1.0)
           .delay(1000)
-          .duration(1000);
+          .duration(3000);
     }
 
   });
