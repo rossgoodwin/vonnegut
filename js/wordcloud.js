@@ -33,6 +33,10 @@
 
 var spectrum = ['#F22613', '#E74C3C', '#D35400', '#F2784B', '#95A5A6', '#68C3A3', '#4DAF7C', '#3FC380', '#2ECC71'];
 
+$("#key-block").append(
+  '<div id=\"key-text-box\"><p class=\"text-center\">&lt;&lt;&lt; negative | text colors | positive &gt;&gt;&gt;</p></div>'
+);
+
 spectrum.map(function(hex){
   $("#key-block").append(
     '<div class=\"key-color\" style=\"background-color:'+hex+';\"></div>'
