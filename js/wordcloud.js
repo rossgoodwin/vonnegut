@@ -1,11 +1,11 @@
 // TO DO:
-// [ ] Add Chart.js line graphs
+// [X] Add Chart.js line graphs
 // [ ] Add Sequential Loading w/ Scroll
 // [ ] Better Loading GIF
 // [ ] LICENSE
 // [ ] ReadMe
-// [ ] INTEGRATE COMPLETE TEXT AS SECRET EASTER EGG
-// [ ] PLAY BUTTON
+// [?] INTEGRATE COMPLETE TEXT AS SECRET EASTER EGG
+// [X] PLAY BUTTON
 
 (function() {
 
