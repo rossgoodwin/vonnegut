@@ -1,3 +1,11 @@
+// TO DO:
+// [ ] Add Chart.js line graphs
+// [ ] Add Sequential Loading w/ Scroll
+// [ ] Better Loading GIF
+// [ ] LICENSE
+// [ ] ReadMe
+// [ ] INTEGRATE COMPLETE TEXT AS SECRET EASTER EGG
+
 (function() {
 
 var spectrum = ['#F22613', '#E74C3C', '#D35400', '#F2784B', '#95A5A6', '#68C3A3', '#4DAF7C', '#3FC380', '#2ECC71'];
