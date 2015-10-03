@@ -145,7 +145,8 @@ $.getJSON("data/vonnegut-0.json", function(data){
     // Charts.js stuff goes here
     Chart.defaults.global.animation = false;
     Chart.defaults.global.tooltipEvents = [];
-    Chart.defaults.global.scaleFontFamily = "'Cousine', monospace"
+    Chart.defaults.global.scaleFontFamily = "'Cousine', monospace";
+    Chart.defaults.global.showScale = false;
 
     $("#"+slug).append(
       '<canvas class="chart-canvas" id=\"'+slug+'-chart\" width=\"800\" height=\"150\"></canvas>'
@@ -178,7 +179,8 @@ $.getJSON("data/vonnegut-0.json", function(data){
     var chartOptions = {
       pointDot : false,
       pointHitDetectionRadius : 1,
-      scaleShowVerticalLines: false
+      scaleShowVerticalLines: false,
+      bezierCurve: false
     };
 
     var myNewChart = new Chart(ctx).Line(chartData, chartOptions);
