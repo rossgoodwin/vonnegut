@@ -107,7 +107,7 @@ function updateCloud(bookslug, section) {
           .style("font-size", function(d) { return d.size + "px"; })
           .style("font-family", "Cousine")
           .style("fill", function(d, i) {
-              var sentiment = data[bookslug]['sentiment'][1];
+              var sentiment = data[bookslug]['sentiment'];
               var ix = Math.floor(((sentiment + 1)/2)*spectrum.length);
               return spectrum[ix];
           })
@@ -186,8 +186,11 @@ $.getJSON("data/vonnegut-0.json", function(data){
     var myNewChart = new Chart(ctx).Line(chartData, chartOptions);
 
 
+    var stepCount = data[slug]['length'] - 1;
+
+
     $("#"+slug).append(
-      '<div class=\"scrubber\"><input id=\"'+slug+'-scrub\" type=\"range\" min=\"0\" max=\"'+data[slug]['length']+'\" value=\"0\" step=\"1\"></div>'
+      '<div class=\"scrubber\"><input id=\"'+slug+'-scrub\" type=\"range\" min=\"0\" max=\"'+stepCount+'\" value=\"0\" step=\"1\"></div>'
     );
 
     // Play Button
