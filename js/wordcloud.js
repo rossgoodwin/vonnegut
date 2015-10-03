@@ -33,6 +33,10 @@
 
 (function() {
 
+Number.prototype.map = function (in_min, in_max, out_min, out_max) {
+  return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
 function range(start, stop, step) {
     if (typeof stop == 'undefined') {
         // one param defined
@@ -197,9 +201,10 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     $("#"+slug+"-chart").on("click", function(evt){
       var activePoints = myNewChart.getPointsAtEvent(evt);
-      console.log(activePoints[0].x);
-      var ratio = activePoints[0].x / 800.0;
-      var ix = Math.round(ratio * data[slug]['length']);
+      var xPos = activePoints[0].x;
+      var ix = Math.round(xPos.map(5, 780, 0, data[slug]['length']));
+      console.log(xPos);
+      console.log(ix);
       $('#'+slug+'-scrub').val(ix);
       updateCloud(slug, ix);
     });
