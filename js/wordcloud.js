@@ -5,31 +5,32 @@
 // [ ] LICENSE
 // [ ] ReadMe
 // [ ] INTEGRATE COMPLETE TEXT AS SECRET EASTER EGG
+// [ ] PLAY BUTTON
 
 (function() {
 
-// function range(start, stop, step) {
-//     if (typeof stop == 'undefined') {
-//         // one param defined
-//         stop = start;
-//         start = 0;
-//     }
+function range(start, stop, step) {
+    if (typeof stop == 'undefined') {
+        // one param defined
+        stop = start;
+        start = 0;
+    }
 
-//     if (typeof step == 'undefined') {
-//         step = 1;
-//     }
+    if (typeof step == 'undefined') {
+        step = 1;
+    }
 
-//     if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
-//         return [];
-//     }
+    if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+        return [];
+    }
 
-//     var result = [];
-//     for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
-//         result.push(i);
-//     }
+    var result = [];
+    for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+        result.push(i);
+    }
 
-//     return result;
-// };
+    return result;
+};
 
 var spectrum = ['#F22613', '#E74C3C', '#D35400', '#F2784B', '#95A5A6', '#68C3A3', '#4DAF7C', '#3FC380', '#2ECC71'];
 
@@ -108,37 +109,53 @@ function updateCloud(bookslug, section) {
 
 }
 
+$.getJSON("data/sentiment.json", function(sent){
 $.getJSON("data/vonnegut-0.json", function(data){
   $("#loadinggif").fadeOut("slow");
   Object.keys(data).sort().map(function(slug){
     $("#vis").append(
-      '<div id=\"'+slug+'\" class=\"col-md-12 transparent\"></div>'
+      '<div id=\"'+slug+'\" class=\"col-md-12 transparent text-center\"></div>'
     );
 
     // Charts.js stuff goes here
-    // $("#"+slug).append(
-    //   '<canvas id=\"'+slug+'-chart\" width=\"400\" height=\"400\"></canvas>'
-    // );
+    Chart.defaults.global.animation = false;
+    Chart.defaults.global.tooltipEvents = [];
+    Chart.defaults.global.scaleFontFamily = "'Cousine', monospace"
 
-    // var ctx = document.getElementById(slug+"-chart").getContext("2d");
+    $("#"+slug).append(
+      '<canvas class="chart-canvas" id=\"'+slug+'-chart\" width=\"840\" height=\"150\" style=\"width: 840px; height: 150px;margin-left: -36px;\"></canvas>'
+    );
 
-    // var data = {
-    //     labels: range(data[slug]['length']),
-    //     datasets: [
-    //         {
-    //             label: data[slug]['title'],
-    //             fillColor: "rgba(220,220,220,0.2)",
-    //             strokeColor: "rgba(220,220,220,1)",
-    //             pointColor: "rgba(220,220,220,1)",
-    //             pointStrokeColor: "#fff",
-    //             pointHighlightFill: "#fff",
-    //             pointHighlightStroke: "rgba(220,220,220,1)",
-    //             data: data
-    //         }
-    //     ]
-    // };
+    var ctx = document.getElementById(slug+"-chart").getContext("2d");
 
-    // var myNewChart = new Chart(ctx).PolarArea(data);
+    var xLabels = [];
+
+    for (var i=0;i<data[slug]['length'];i++) {
+      xLabels.push('');
+    }
+
+    var chartData = {
+        labels: xLabels,
+        datasets: [
+            {
+                label: data[slug]['title'],
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: sent[slug]
+            }
+        ]
+    };
+
+    var chartOptions = {
+      pointDot : false,
+      pointHitDetectionRadius : 1
+    };
+
+    var myNewChart = new Chart(ctx).Line(chartData, chartOptions);
 
 
     $("#"+slug).append(
@@ -151,6 +168,7 @@ $.getJSON("data/vonnegut-0.json", function(data){
       updateCloud(slug, sectNo);
     });
   });
+});
 });
 
 })();
