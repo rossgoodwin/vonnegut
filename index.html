@@ -261,10 +261,14 @@ input[type=range]::-moz-range-track {
 input[type=range]::-moz-range-thumb {
     z-index: 99;
     border: none;
-    height: 125px;
+    height: 50px;
     width: 8px;
     border-radius: 0;
     background: #F22613;
+    /*margin-bottom: 145px;*/
+    /*bottom: 145px;*/
+    opacity: 0.5;
+    /*border-bottom: 4px solid #000;*/
 }
 
 /*hide the outline behind the border*/
@@ -299,10 +303,13 @@ input[type=range]::-ms-fill-upper {
 input[type=range]::-ms-thumb {
     z-index: 99;
     border: none;
-    height: 125px;
+    height: 150px;
     width: 8px;
     border-radius: 0;
     background: #F22613;
+    margin-top: -145px;
+    opacity: 0.5;
+    border-bottom: 4px solid #000;
 }
 input[type=range]:focus::-ms-fill-lower {
     background: #888;
