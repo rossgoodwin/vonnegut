@@ -202,21 +202,30 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     var play;
 
-    function autoAdvance(){
-        var scrubVal = $('#'+slug+'-scrub').val();
-        console.log(scrubVal);
-        var newVal = parseInt(scrubVal, 10) + 1;
-        $('#'+slug+'-scrub').val(newVal);
-        updateCloud(slug, newVal);
-    }
-
     $('#'+slug+'-btn').click(function(){
+
       console.log('clicked ' + slug);
       autoAdvance();
       play = setInterval(function(){
         autoAdvance();
       }, 2500);
+
+      function autoAdvance(){
+          var scrubVal = $('#'+slug+'-scrub').val();
+          console.log(data[slug]['length']);
+          if (scrubVal >= data[slug]['length']-1) {
+            console.log("EOR");
+            clearInterval(play);
+          }
+          console.log(scrubVal);
+          var newVal = parseInt(scrubVal, 10) + 1;
+          $('#'+slug+'-scrub').val(newVal);
+          updateCloud(slug, newVal);
+      }
+
     });
+
+
 
     $('#'+slug+'-btn-pause').click(function(){
       clearInterval(play);
