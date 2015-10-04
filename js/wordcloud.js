@@ -171,9 +171,9 @@ $.getJSON("data/vonnegut-0.json", function(data){
         datasets: [
             {
                 label: data[slug]['title'],
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
+                fillColor: "rgba(210, 215, 211, 0.7)",
+                strokeColor: "rgba(189, 195, 199, 1)",
+                pointColor: "rgba(210, 215, 211, 1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
