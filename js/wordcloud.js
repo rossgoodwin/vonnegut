@@ -1,4 +1,4 @@
-// Dynamic TF-IDF Word Cloud Visualizer
+// Interactive TF-IDF Word Cloud Visualizer
 
 // Copyright (C) 2015  Ross Goodwin
 
@@ -37,28 +37,15 @@ Number.prototype.map = function (in_min, in_max, out_min, out_max) {
   return (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-function range(start, stop, step) {
-    if (typeof stop == 'undefined') {
-        // one param defined
-        stop = start;
-        start = 0;
-    }
+function titleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
-    if (typeof step == 'undefined') {
-        step = 1;
-    }
-
-    if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
-        return [];
-    }
-
-    var result = [];
-    for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
-        result.push(i);
-    }
-
-    return result;
-};
+// Charts.js global config
+Chart.defaults.global.animation = false;
+Chart.defaults.global.tooltipEvents = [];
+Chart.defaults.global.scaleFontFamily = "'Cousine', monospace";
+Chart.defaults.global.showScale = false;
 
 var spectrum = ['#F22613', '#E74C3C', '#D35400', '#F2784B', '#95A5A6', '#68C3A3', '#4DAF7C', '#3FC380', '#2ECC71'];
 
@@ -121,12 +108,14 @@ function updateCloud(bookslug, section) {
           })
           .text(function(d) { return d.text; });
 
+      var title = titleCase(data[bookslug]['title']);
+
       var labelText = overallContainer
                       .append("a")
-                      .attr("href", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s"+data[bookslug]['title']+"&mode=blended")
+                      .attr("href", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s"+title+"&mode=blended")
                       .attr("class", "twitter-link")
                       .attr("target", "_blank")
-                      .text(data[bookslug]['title']);
+                      .text(title);
 
       overallContainer.transition()
           .style("opacity", 1.0)
@@ -146,17 +135,9 @@ $.getJSON("data/vonnegut-0.json", function(data){
       '<div id=\"'+slug+'\" class=\"col-md-12 transparent text-center\"></div>'
     );
 
-    // Charts.js stuff goes here
-    Chart.defaults.global.animation = false;
-    Chart.defaults.global.tooltipEvents = [];
-    Chart.defaults.global.scaleFontFamily = "'Cousine', monospace";
-    Chart.defaults.global.showScale = false;
-
     $("#"+slug).append(
       '<canvas class="chart-canvas" id=\"'+slug+'-chart\" width=\"800\" height=\"150\"></canvas>'
     );
-
-
 
     var ctx = document.getElementById(slug+"-chart").getContext("2d");
 
@@ -170,7 +151,7 @@ $.getJSON("data/vonnegut-0.json", function(data){
         labels: xLabels,
         datasets: [
             {
-                label: data[slug]['title'],
+                label: titleCase(data[slug]['title']),
                 fillColor: "rgba(210, 215, 211, 0.7)",
                 strokeColor: "rgba(189, 195, 199, 1)",
                 pointColor: "rgba(210, 215, 211, 1)",
@@ -193,11 +174,9 @@ $.getJSON("data/vonnegut-0.json", function(data){
 
     var stepCount = data[slug]['length'] - 1;
 
-
     $("#"+slug).append(
       '<div class=\"scrubber\"><input id=\"'+slug+'-scrub\" type=\"range\" min=\"0\" max=\"'+stepCount+'\" value=\"0\" step=\"1\"></div>'
     );
-
 
     $("#"+slug+"-chart").on("click", function(evt){
       var activePoints = myNewChart.getPointsAtEvent(evt);
