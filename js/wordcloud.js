@@ -73,7 +73,7 @@ function updateCloud(bookslug, section) {
           return {text: d[0], size: d[1] * 500};
         }))
         .padding(3)
-        // .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .rotate(function() { return 0; }) // return ~~(Math.random() * 2) * 90
         .font("Cousine")
         .fontSize(function(d) { return d.size; })
         .on("end", draw);
@@ -210,7 +210,7 @@ $.getJSON("data/vonnegut-0.json", function(data){
       autoAdvance();
       play = setInterval(function(){
         autoAdvance();
-      }, 2500);
+      }, 5000);
 
       function autoAdvance(){
           var scrubVal = $('#'+slug+'-scrub').val();
