@@ -190,19 +190,61 @@ $.getJSON("data/vonnegut-0.json", function(data){
       updateCloud(slug, ix);
     });
 
+    // Step Backward
+    $('#'+slug).append(
+      '<button type=\"button\" id=\"'+slug+'-btn-rev\" class=\"btn btn-default btn-xs play-btn\" aria-label=\"Pause\"><span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span></button>'
+    );
+
     // Play Button
     $('#'+slug).append(
       '<button type=\"button\" id=\"'+slug+'-btn\" class=\"btn btn-default btn-xs play-btn\" aria-label=\"Play\"><span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span></button>'
     );
 
+    // Pause
     $('#'+slug).append(
       '<button type=\"button\" id=\"'+slug+'-btn-pause\" class=\"btn btn-default btn-xs play-btn\" aria-label=\"Pause\"><span class=\"glyphicon glyphicon-pause\" aria-hidden=\"true\"></span></button>'
+    );
+
+    // Step Forward
+    $('#'+slug).append(
+      '<button type=\"button\" id=\"'+slug+'-btn-fwd\" class=\"btn btn-default btn-xs play-btn\" aria-label=\"Pause\"><span class=\"glyphicon glyphicon-step-forward\" aria-hidden=\"true\"></span></button>'
     );
 
     // Load First Clouds
     updateCloud(slug, 0);
 
     var play;
+
+    function autoAdvance(){
+      var scrubVal = $('#'+slug+'-scrub').val();
+      // console.log(data[slug]['length']);
+      if (scrubVal >= data[slug]['length']-1) {
+        console.log("EOR");
+        clearInterval(play);
+      }
+      console.log(scrubVal);
+      var newVal = parseInt(scrubVal, 10) + 1;
+      $('#'+slug+'-scrub').val(newVal);
+      updateCloud(slug, newVal);
+    }
+
+    function autoReverse(){
+      var scrubVal = $('#'+slug+'-scrub').val();
+      // console.log(data[slug]['length']);
+      if (scrubVal <= 0) {
+        console.log("EOR");
+        clearInterval(play);
+      } else {
+        console.log(scrubVal);
+        var newVal = parseInt(scrubVal, 10) - 1;
+        $('#'+slug+'-scrub').val(newVal);
+        updateCloud(slug, newVal);
+      }    
+    }
+
+    $('#'+slug+'-btn-fwd').click(autoAdvance);
+
+    $('#'+slug+'-btn-rev').click(autoReverse);
 
     $('#'+slug+'-btn').click(function(){
 
@@ -211,19 +253,6 @@ $.getJSON("data/vonnegut-0.json", function(data){
       play = setInterval(function(){
         autoAdvance();
       }, 5000);
-
-      function autoAdvance(){
-          var scrubVal = $('#'+slug+'-scrub').val();
-          console.log(data[slug]['length']);
-          if (scrubVal >= data[slug]['length']-1) {
-            console.log("EOR");
-            clearInterval(play);
-          }
-          console.log(scrubVal);
-          var newVal = parseInt(scrubVal, 10) + 1;
-          $('#'+slug+'-scrub').val(newVal);
-          updateCloud(slug, newVal);
-      }
 
     });
 
