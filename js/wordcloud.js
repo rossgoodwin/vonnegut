@@ -48,8 +48,8 @@ Chart.defaults.global.scaleFontFamily = "'Cousine', monospace";
 Chart.defaults.global.showScale = false;
 
 // var spectrum = ['#F22613', '#E74C3C', '#D35400', '#F2784B', '#95A5A6', '#68C3A3', '#4DAF7C', '#3FC380', '#2ECC71'];
-var spectrum = ["#f22613", "#f25749", "#f28379", "#f2b0aa", "#95a5a6", "#add9c2", "#74b391", "#45996c", "#1e824c"];
-
+// var spectrum = ["#f22613", "#f25749", "#f28379", "#f2b0aa", "#95a5a6", "#add9c2", "#74b391", "#45996c", "#1e824c"];
+var spectrum = ["#f22613", "#f25749", "#f28379", "#b99996", "#95a5a6", "#99b996", "#74b391", "#45996c", "#1e824c"];
 
 $("#key-block").append(
   '<div id=\"key-text-box\"><p class=\"text-center lead small\" style=\"margin-left: 7px;\">&lt;&lt;&lt; negative | positive &gt;&gt;&gt;</p></div>'
