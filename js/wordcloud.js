@@ -138,8 +138,13 @@ $.getJSON("data/vonnegut-0.json", function(data){
     var title = titleCase(data[slug]['title']);
 
     $("#toc").append(
-      '<a class=\"toc-btn btn btn-default btn-xs\" href=\"#'+slug+'-chart\">'+title+'</a>'
+      '<button class=\"toc-btn btn btn-default btn-xs\" id=\"'+slug+'-toc\">'+title+'</button>'
     );
+
+    $("#"+slug+"-toc").click(function(){
+      console.log(slug + " pressed");
+      $.scrollTo("#"+slug+"-chart", 2000);
+    });
 
     $("#vis").append(
       '<div id=\"'+slug+'\" class=\"col-md-12 transparent text-center\"></div>'
