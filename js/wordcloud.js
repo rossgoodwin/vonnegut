@@ -38,7 +38,7 @@ Number.prototype.map = function (in_min, in_max, out_min, out_max) {
 }
 
 function titleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/[\w']+/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
 // Charts.js global config
@@ -131,8 +131,16 @@ function updateCloud(bookslug, section) {
 
 $.getJSON("data/sentiment.json", function(sent){
 $.getJSON("data/vonnegut-0.json", function(data){
+
   $("#loadinggif").fadeOut("slow");
+
   Object.keys(data).sort().map(function(slug){
+    var title = titleCase(data[slug]['title']);
+
+    $("#toc").append(
+      '<a class=\"toc-btn btn btn-default btn-xs\" href=\"#'+slug+'-chart\">'+title+'</a>'
+    );
+
     $("#vis").append(
       '<div id=\"'+slug+'\" class=\"col-md-12 transparent text-center\"></div>'
     );
