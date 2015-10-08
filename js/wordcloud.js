@@ -114,7 +114,7 @@ function updateCloud(bookslug, section) {
 
       var labelText = overallContainer
                       .append("a")
-                      .attr("href", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s"+title+"&mode=blended")
+                      .attr("href", "http://www.amazon.com/exec/obidos/external-search/?field-keywords=%s"+title+" vonnegut&mode=blended")
                       .attr("class", "twitter-link")
                       .attr("target", "_blank")
                       .text(title);
